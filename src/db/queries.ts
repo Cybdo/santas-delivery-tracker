@@ -9,11 +9,7 @@ export function readPlaces() {
 
 
 export function addGifts(locationName: string, numGifts: number) {
-  const existing = db
-    .select()
-    .from(places)
-    .where(eq(places.name, locationName))
-    .get()
+  const existing = db.select().from(places).where(eq(places.name, locationName)).get()
 
   if (existing) {
     const res = db

@@ -4,7 +4,13 @@ import { readPlaces, addGifts, fulfillDelivery, fulfillAll, deleteDelivery } fro
 const app = new Hono()
 
 app.get('/', (c) => {
-  return c.text('Hello Hono!')
+  return c.text(`Hello Hono!
+                GET /api/places to see the places data
+                POST /api/places/gifts with { locationName, numGifts } to add gifts
+                POST /api/places/fulfillall with { locationName } to fulfill all gifts
+                POST /api/places/fulfill with { locationName, numGifts } to fulfill specific number of gifts
+                DELETE /api/places with { locationName } to delete a delivery
+                `)
 })
 
 
@@ -87,4 +93,9 @@ app.delete('/api/places', async (c) => {
   }
 })
 
-export default app
+const port = Number(process.env.PORT) || 3000
+
+export default {
+  port,
+  fetch: app.fetch,
+}
